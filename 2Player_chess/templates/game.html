@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess - 2 Player</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="theme-background">
+    <div class="container">
+        <div class="game-layout">
+            <div class="board-area">
+                <div class="board-container {% if move_made %}animate-flip{% endif %}">
+                    <div class="board" id="board">
+                        <svg id="arrow-layer" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"></svg>
+
+                        <!-- Board Rendering via Jinja for initial load -->
+                        {% for row in board %}
+                        {% for square in row %}
+                        <div class="square 
+                                    {% if square.is_light %}light{% else %}dark{% endif %}
+                                    {% if square.is_selected %}selected{% endif %}
+                                    {% if square.is_legal %}legal-target{% endif %}
+                                    {% if square.piece_color %}piece-{{ square.piece_color }}{% endif %}"
+                            data-index="{{ square.index }}" id="sq-{{ square.index }}">
+
+                            <!-- Rank/File Labels -->
+                            {% if square.index % 8 == 0 %}
+                            <span class="rank-label">{{ 8 - (square.index // 8) }}</span>
+                            {% endif %}
+                            {% if square.index >= 56 %}
+                            <span class="file-label">{{ 'abcdefgh'[square.index % 8] }}</span>
+                            {% endif %}
+
+                            <!-- Piece Image -->
+                            {% if square.piece_image %}
+                            <div class="piece-layer" style="background-image: url('{{ square.piece_image }}');"></div>
+                            {% endif %}
+
+                            <!-- Move Target Marker -->
+                            {% if square.is_legal %}
+                            <div class="move-hint"></div>
+                            {% endif %}
+
+                        </div>
+                        {% endfor %}
+                        {% endfor %}
+                    </div>
+
+                    <!-- History Overlay Indicator -->
+                    <div id="history-overlay" class="hidden">Viewing History</div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <h1>♔ Chess ♚</h1>
+
+                <div class="status {% if in_check %}check{% endif %} {% if game_over %}game-over{% endif %}">
+                    {{ status_text }}
+                </div>
+
+                <div class="controls">
+                    <button id="btn-new-game" class="reset-btn">New Game</button>
+
+                    <div class="mode-controls">
+                        <h3>Game Mode</h3>
+                        <div class="mode-buttons">
+                            <button id="btn-mode-pvp"
+                                class="mode-btn {% if game_mode == 'pvp' %}active{% endif %}">PvP</button>
+                            <button id="btn-mode-ai" class="mode-btn {% if game_mode == 'ai' %}active{% endif %}">Vs
+                                Computer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    <p>Arrow Keys ⬅ ➡ to review details.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promotion Modal -->
+    <div id="promotion-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Promote Pawn</h2>
+            <div class="promo-options">
+                <button class="promo-opt" data-piece="Q">Queen</button>
+                <button class="promo-opt" data-piece="R">Rook</button>
+                <button class="promo-opt" data-piece="B">Bishop</button>
+                <button class="promo-opt" data-piece="N">Knight</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='game.js') }}"></script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pawn Promotion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>♔ Pawn Promotion ♚</h1>
+
+        <div class="promotion-dialog">
+            <h2>Choose your piece:</h2>
+
+            <div class="promotion-choices">
+                <form action="{{ url_for('promote', piece='Q') }}" method="post">
+                    <button type="submit" class="promo-btn">
+                        <img src="{% if color == 'white' %}https://upload.wikimedia.org/wikipedia/commons/1/15/Chess_qlt45.svg{% else %}https://upload.wikimedia.org/wikipedia/commons/4/47/Chess_qdt45.svg{% endif %}"
+                            alt="Queen" class="promo-piece-img">
+                        <span class="piece-name">Queen</span>
+                    </button>
+                </form>
+
+                <form action="{{ url_for('promote', piece='R') }}" method="post">
+                    <button type="submit" class="promo-btn">
+                        <img src="{% if color == 'white' %}https://upload.wikimedia.org/wikipedia/commons/7/72/Chess_rlt45.svg{% else %}https://upload.wikimedia.org/wikipedia/commons/f/ff/Chess_rdt45.svg{% endif %}"
+                            alt="Rook" class="promo-piece-img">
+                        <span class="piece-name">Rook</span>
+                    </button>
+                </form>
+
+                <form action="{{ url_for('promote', piece='B') }}" method="post">
+                    <button type="submit" class="promo-btn">
+                        <img src="{% if color == 'white' %}https://upload.wikimedia.org/wikipedia/commons/b/b1/Chess_blt45.svg{% else %}https://upload.wikimedia.org/wikipedia/commons/9/98/Chess_bdt45.svg{% endif %}"
+                            alt="Bishop" class="promo-piece-img">
+                        <span class="piece-name">Bishop</span>
+                    </button>
+                </form>
+
+                <form action="{{ url_for('promote', piece='N') }}" method="post">
+                    <button type="submit" class="promo-btn">
+                        <img src="{% if color == 'white' %}https://upload.wikimedia.org/wikipedia/commons/7/70/Chess_nlt45.svg{% else %}https://upload.wikimedia.org/wikipedia/commons/e/ef/Chess_ndt45.svg{% endif %}"
+                            alt="Knight" class="promo-piece-img">
+                        <span class="piece-name">Knight</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
