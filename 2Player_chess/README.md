@@ -46,7 +46,6 @@ A fully interactive Chess game built with Python (Flask) and a custom Bitboard-b
 
 *   **Move**: Drag pieces or click source then destination.
 *   **AI Mode**: Click "Vs Computer" in the sidebar to switch modes.
-*   **Review**: Press `<-` (Left Arrow) to undo/view history. Press `->` (Right Arrow) to catch up to live gameplay.
 *   **New Game**: Click the "New Game" button to reset the board.
 
 ## 📂 Project Structure
@@ -58,4 +57,5 @@ A fully interactive Chess game built with Python (Flask) and a custom Bitboard-b
 *   `templates/`: HTML files.
 
 Enjoy!
+
 
