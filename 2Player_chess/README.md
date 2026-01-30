@@ -1,4 +1,4 @@
-# ♟️ Python Flask Chess
+# 2 player based Chess
 
 A fully interactive Chess game built with Python (Flask) and a custom Bitboard-based Chess Engine. Play against a friend or challenge the AI!
 
@@ -58,3 +58,4 @@ A fully interactive Chess game built with Python (Flask) and a custom Bitboard-b
 *   `templates/`: HTML files.
 
 Enjoy!
+
